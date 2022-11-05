@@ -1,0 +1,93 @@
+_schema-version: "3.2"
+ID: ManteGrupos-mantegrupos
+description: A Fiori application.
+version: 0.0.1
+modules:
+- name: ManteGrupos-mantegrupos-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: ManteGrupos-mantegrupos-destination-service
+    parameters:
+      content-target: true
+  - name: ManteGrupos-mantegrupos-repo-host
+    parameters:
+      service-key:
+        name: ManteGrupos-mantegrupos-repo-host-key
+  - name: ManteGrupos-mantegrupos-uaa
+    parameters:
+      service-key:
+        name: ManteGrupos-mantegrupos-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: ManteGrupos-mantegrupos_html_repo_host
+          ServiceInstanceName: ManteGrupos-mantegrupos-html5-srv
+          ServiceKeyName: ManteGrupos-mantegrupos-repo-host-key
+          sap.cloud.service: ManteGrupos-mantegrupos
+        - Authentication: OAuth2UserTokenExchange
+          Name: ManteGrupos-mantegrupos_uaa
+          ServiceInstanceName: iprovider_xsuaa
+          ServiceKeyName: ManteGrupos-mantegrupos-uaa-key
+          sap.cloud.service: ManteGrupos-mantegrupos
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: ManteGrupos-mantegrupos-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: ManteGrupos-mantegrupos-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - ManteGruposmantegrupos.zip
+      name: ManteGruposmantegrupos
+      target-path: resources/
+- name: ManteGruposmantegrupos
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: ManteGrupos-mantegrupos-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: iprovider_destination
+    service-plan: lite
+- name: ManteGrupos-mantegrupos-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: xsuaa
+    service-name: iprovider_xsuaa
+    service-plan: application
+- name: ManteGrupos-mantegrupos-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: ManteGrupos-mantegrupos-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true

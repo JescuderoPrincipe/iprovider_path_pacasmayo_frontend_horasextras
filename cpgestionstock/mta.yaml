@@ -1,0 +1,93 @@
+_schema-version: "3.2"
+ID: com-cementos-pacasmayo-cpgestionstock
+description: A Fiori application.
+version: 0.0.1
+modules:
+- name: com-cementos-pacasmayo-cpgestionstock-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: com-cementos-pacasmayo-cpgestionstock-destination-service
+    parameters:
+      content-target: true
+  - name: com-cementos-pacasmayo-cpgestionstock-repo-host
+    parameters:
+      service-key:
+        name: com-cementos-pacasmayo-cpgestionstock-repo-host-key
+  - name: com-cementos-pacasmayo-cpgestionstock-uaa
+    parameters:
+      service-key:
+        name: com-cementos-pacasmayo-cpgestionstock-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: com-cementos-pacasmayo-cpgestionstock_html_repo_host
+          ServiceInstanceName: com-cementos-pacasmayo-cpgestionstock-html5-srv
+          ServiceKeyName: com-cementos-pacasmayo-cpgestionstock-repo-host-key
+          sap.cloud.service: com-cementos-pacasmayo-cpgestionstock
+        - Authentication: OAuth2UserTokenExchange
+          Name: com-cementos-pacasmayo-cpgestionstock_uaa
+          ServiceInstanceName: iprovider_xsuaa
+          ServiceKeyName: com-cementos-pacasmayo-cpgestionstock-uaa-key
+          sap.cloud.service: com-cementos-pacasmayo-cpgestionstock
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: com-cementos-pacasmayo-cpgestionstock-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: com-cementos-pacasmayo-cpgestionstock-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comcementospacasmayocpgestionstock.zip
+      name: comcementospacasmayocpgestionstock
+      target-path: resources/
+- name: comcementospacasmayocpgestionstock
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: com-cementos-pacasmayo-cpgestionstock-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: iprovider_destination
+    service-plan: lite
+- name: com-cementos-pacasmayo-cpgestionstock-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: xsuaa
+    service-name: iprovider_xsuaa
+    service-plan: application
+- name: com-cementos-pacasmayo-cpgestionstock-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: com-cementos-pacasmayo-cpgestionstock-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true

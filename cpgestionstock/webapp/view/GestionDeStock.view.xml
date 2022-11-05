@@ -1,0 +1,76 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.cementos.pacasmayo.cpgestionstock.controller.GestionDeStock" xmlns="sap.m">
+    <Page showHeader="true" title="Gestion de Stock" showFooter="false" showNavButton="false">
+        <content id="contentidtile">
+            <!-- <OverflowToolbar width="auto" design="Transparent" visible="true" enabled="true"> -->
+                <!-- <content> -->
+                <ToolbarSpacer width="10%"/>
+                <GenericTile  id="tilemedicion" class="sapUiLargeMarginBegin sapUiLargeMarginTop tileLayout" 
+                            header="Medicion Diaria"
+                            subheader="Ingresar" 
+                            press="_onButtonPress"
+                           >
+                    <tileContent>
+                        <TileContent footer="Registro">
+                            <content>
+                                <ImageContent src="sap-icon://measuring-point"/>
+                            </content>
+                        </TileContent>
+                    </tileContent>
+                </GenericTile>
+                <!-- <GenericTile class="sapUiLargeMarginBegin sapUiLargeMarginTop tileLayout" 
+                            header="Stock en Bolsas"
+                            subheader="Ingresar" 
+                            press="_onButtonPress1">
+                    <tileContent>
+                        <TileContent footer="Registro">
+                            <content>
+                                <ImageContent src="sap-icon://measuring-point"/>
+                            </content>
+                        </TileContent>
+                    </tileContent>
+                </GenericTile> -->
+                <GenericTile id ="tilecubicaje" class="sapUiLargeMarginBegin sapUiLargeMarginTop tileLayout" 
+                            header="Cubicaje Mensual"
+                            subheader="Ingresar" 
+                            press="_onButtonPress2">
+                    <tileContent>
+                        <TileContent footer="Registro">
+                            <content>
+                                <ImageContent src="sap-icon://calendar"/>
+                            </content>
+                        </TileContent>
+                    </tileContent>
+                </GenericTile>
+                
+                <GenericTile id="tileEvolucionStock" class="sapUiLargeMarginBegin sapUiLargeMarginTop tileLayout" 
+                            header="Evolucion Stock"
+                            subheader="Reporte" 
+                            press="_onButtonPress3">
+                    <tileContent>
+                        <TileContent footer="Ingresar">
+                            <content>
+                                <ImageContent src="sap-icon://calendar"/>
+                            </content>
+                        </TileContent>
+                    </tileContent>
+                </GenericTile>
+                    <!-- <Button text="Medicion Diaria" type="Emphasized" icon="sap-icon://measuring-point" iconFirst="true" width="20%" enabled="true" visible="true" iconDensityAware="false" class="sapUiResponsiveMargin" press="_onButtonPress"/>
+                    <Button text="Stock en Bolsas" type="Emphasized" icon="sap-icon://measuring-point" iconFirst="true" width="20%" enabled="true" visible="true" iconDensityAware="false" class="sapUiResponsiveMargin" press="_onButtonPress1"/>
+                    <Button text="Cubicaje Mensual" type="Emphasized" icon="sap-icon://calendar" iconFirst="true" width="20%" enabled="true" visible="true" iconDensityAware="false" class="sapUiResponsiveMargin" press="_onButtonPress2"/> -->
+                <!-- </content> -->
+            <!-- </OverflowToolbar> -->
+        </content>
+        <footer>
+            <OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
+                <content>
+                    <ToolbarSpacer width=""/>
+                    <Button text="Save" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                    <Button text="Cancel" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                </content>
+            </OverflowToolbar>
+        </footer>
+        <headerContent/>
+        <subHeader/>
+        <customHeader/>
+    </Page>
+</mvc:View>

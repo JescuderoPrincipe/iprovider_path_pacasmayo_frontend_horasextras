@@ -1,0 +1,96 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.cementos.pacasmayo.cpgestionstock.controller.StockEnBolsas" xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:microchart="sap.suite.ui.microchart" xmlns:core="sap.ui.core">
+    <Page showHeader="true" title="Stock en Bolsas" showFooter="true" showNavButton="true" navButtonPress="_onPageNavButtonPress">
+        <content>
+            <form:Form width="100%" editable="true" visible="true">
+                <form:title/>
+                <form:formContainers>
+                    <form:FormContainer visible="true">
+                        <form:formElements>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Planta" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <ComboBox id="cblCentro"
+                                        items="{centro>/centroitems}" selectedKey="" placeholder="Seleccionar Planta" editable="true" enabled="true" visible="true" width="100%" valueState="None" maxWidth="100%" change="onGetTipoMedio">
+                                        <core:Item key="{centro>PLANTID}" text="{centro>PLANTID} - {centro>PLANTNAME}" />
+                                    </ComboBox>
+                                    <!-- <Input id="ipPlanta" type="Text" showValueHelp="false" enabled="false" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/> -->
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                        <form:title/>
+                    </form:FormContainer>
+                    <form:FormContainer visible="true">
+                        <form:formElements>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Fecha" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <DatePicker id="dpfechaActual" width="100%" displayFormat="medium" enabled="false" visible="true" valueFormat="yyyyMMdd"/>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                        <form:title/>
+                    </form:FormContainer>
+                    <form:FormContainer visible="true">
+                        <form:formElements>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <OverflowToolbar width="100%" visible="true" enabled="true" iconDensityAware="false" style="Clear">
+                                        <content>
+                                            <!-- <ToolbarSpacer width="90%"/> -->
+                                            <Button text="Buscar" type="Emphasized" icon="sap-icon://search" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onBuscar"/>
+                                        </content>
+                                    </OverflowToolbar>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                        <form:title/>
+                    </form:FormContainer>
+                </form:formContainers>
+                <form:layout>
+                    <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="3" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+                </form:layout>
+            </form:Form>
+            <Table id="tblStockBolsas" width="90%" noDataText="No se encontro informacion" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiLargeMarginBeginEnd">
+                <infoToolbar>
+                    <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                        <content>
+                            <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                        </content>
+                    </Toolbar>
+                </infoToolbar>
+                <headerToolbar>
+                    <OverflowToolbar width="100%" height="10%" design="Auto" visible="true" enabled="true">
+                        <content/>
+                    </OverflowToolbar>
+                </headerToolbar>
+            </Table>
+            <FlexBox
+                height="100px"
+                alignItems="Start"
+                justifyContent="End">
+                <items>
+                    <FormattedText id="total" type="Emphasized" class="sapUiLargeMarginEnd sapUiSmallMarginTop" />
+                </items>
+            </FlexBox>
+        </content>
+        <footer>
+            <OverflowToolbar width="100%" height="auto" design="Auto" enabled="true" visible="true">
+                <content>
+                    <ToolbarSpacer width=""/>
+                    <Button id="btnSave" text="Guardar" type="Emphasized" icon="sap-icon://save" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress"/>
+                    <Button text="Cancelar" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress1"/>
+                </content>
+            </OverflowToolbar>
+        </footer>
+        <headerContent/>
+        <subHeader/>
+        <customHeader/>
+    </Page>
+</mvc:View>

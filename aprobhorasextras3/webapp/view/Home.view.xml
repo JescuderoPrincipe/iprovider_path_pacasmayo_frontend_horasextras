@@ -1,0 +1,204 @@
+<mvc:View controllerName="Aprob.Horas.Extras.aprobhorasextras3.controller.Home" xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:core="sap.ui.core"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<App id="app">
+		<pages>
+			<Page title="Procesar HHEE">
+				<content>
+					<fb:FilterBar class="filterBar" reset="onReset" search="onSearch" showClearButton="true" showClearOnFB="true" clear="onClear">
+						<fb:filterGroupItems>
+							<fb:FilterGroupItem groupName="A" name="A" label="Sociedad" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<MultiInput id="filterBukrs" required="true" maxSuggestionWidth="100%" showSuggestion="true" liveChange="onLiveChange" app:campo="BUKRS_SOL"
+										suggestionItems="{ path: '/', sorter: { path: 'Name' } }" showValueHelp="false">
+										<core:Item key="{VALUE}" text="{TEXTO}"/>
+									</MultiInput>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="A" name="B" label="División de personal" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<MultiInput id="filterPersa" required="true" maxSuggestionWidth="100%" showSuggestion="true" liveChange="onLiveChange" app:campo="PERSA_SOL"
+										suggestionItems="{ path: '/', sorter: { path: 'Name' } }" showValueHelp="false">
+										<core:Item key="{VALUE}" text="{TEXTO}"/>
+									</MultiInput>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="A" name="C" label="Colaborador" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<MultiInput id="filterPernr" maxSuggestionWidth="100%" showSuggestion="true" liveChange="onLiveChange" app:campo="PERNR_SOL"
+										suggestionItems="{ path: '/', sorter: { path: 'Name' } }" showValueHelp="false">
+										<core:Item key="{VALUE}" text="{TEXTO}"/>
+									</MultiInput>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="A" name="D" label="Área" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<MultiInput id="filterOrgeh" maxSuggestionWidth="100%" showSuggestion="true" liveChange="onLiveChange" app:campo="ORGEH_SOL"
+										suggestionItems="{ path: '/', sorter: { path: 'Name' } }" showValueHelp="false">
+										<core:Item key="{VALUE}" text="{TEXTO}"/>
+									</MultiInput>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="A" name="E" label="Rango de fecha" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<DateRangeSelection required="true" id="filterRangoFecha"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="A" name="F" label="Rango de cant. HE desde" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<Input id="filterCantDesde"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="A" name="G" label="Rango de cant. HE hasta" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<Input id="filterCantHasta"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="A" name="H" label="Centro de costo" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<MultiInput id="filterKostl" maxSuggestionWidth="100%" showSuggestion="true" liveChange="onLiveChange" app:campo="KOSTL_AUFNR_SOL_FILTRO"
+										suggestionItems="{ path: '/', sorter: { path: 'Name' } }" showValueHelp="false">
+										<core:Item key="{VALUE}" text="{TEXTO}"/>
+									</MultiInput>
+								</fb:control>
+							</fb:FilterGroupItem>
+						</fb:filterGroupItems>
+					</fb:FilterBar>
+					<Table id="table" items="{ path: '/', sorter: { path: 'Name' } }" alternateRowColors="true" contextualWidth="500px" popinLayout="GridSmall"
+						mode="MultiSelect">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Registros ({/length})" level="H2"/>
+								<ToolbarSpacer/>
+								<Button icon="sap-icon://action-settings" press="onPersoButtonPressed">
+									<layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow"/>
+									</layoutData>
+								</Button>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column id="APNOM" width="15rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+								<header>
+									<Label text="Colaborador"/>
+								</header>
+							</Column>
+							<Column id="FECHE" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+								<header>
+									<Label text="Fecha HE"/>
+								</header>
+							</Column>
+							<Column id="CNTHE" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+								<header>
+									<Label text="Cant. HE"/>
+								</header>
+							</Column>
+							<Column id="HPPAG" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+								<header>
+									<Label text="Para Pago"/>
+								</header>
+							</Column>
+							<Column id="HPCOM" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+								<header>
+									<Label text="Para Comp."/>
+								</header>
+							</Column>
+							<Column id="FCOM" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+								<header>
+									<Label text="Fecha Comp."/>
+								</header>
+							</Column>
+							<Column id="HNAUT" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+								<header>
+									<Label text="No Autoriz."/>
+								</header>
+							</Column>
+							<Column id="MOTIVO" width="16rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+								<header>
+									<Label text="Motivo HE"/>
+								</header>
+							</Column>
+							<Column id="COMENT" width="4rem" demandPopin="true" minScreenWidth="Desktop" popinDisplay="Inline">
+								<header>
+									<Label text="Detalle Motivo"/>
+								</header>
+							</Column>
+							<Column id="COMENT2" width="4rem" demandPopin="true" minScreenWidth="Desktop" popinDisplay="Inline">
+								<header>
+									<Label text="Motivo de Hrs No Autor"/>
+								</header>
+							</Column>
+							<Column id="NAME1" width="4rem" demandPopin="true" minScreenWidth="Desktop" popinDisplay="Inline">
+								<header>
+									<Label text="División de Personal"/>
+								</header>
+							</Column>
+							<Column id="ORGTX" width="15rem" demandPopin="true" minScreenWidth="Desktop" popinDisplay="Inline">
+								<header>
+									<Label text="Área"/>
+								</header>
+							</Column>
+							<Column id="H_TEO" width="4rem" demandPopin="true" minScreenWidth="Desktop" popinDisplay="Inline">
+								<header>
+									<Label text="Turno Teórico"/>
+								</header>
+							</Column>
+							<Column id="H_REA" width="4rem" demandPopin="true" minScreenWidth="Desktop" popinDisplay="Inline">
+								<header>
+									<Label text="Marca Real"/>
+								</header>
+							</Column>
+							<Column id="KTEXT" width="4rem" demandPopin="true" minScreenWidth="Desktop" popinDisplay="Inline">
+								<header>
+									<Label text="Ceco / OI"/>
+								</header>
+							</Column>
+							<Column id="KTEXT_AP" width="4rem" demandPopin="true" minScreenWidth="Desktop" popinDisplay="Inline">
+								<header>
+									<Label text="Ceco Aplicado"/>
+								</header>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Label text="{APNOM}"/>
+									<Label text="{path:'FECHE', formatter:'.Date'}"/>
+									<Label text="{CNTHE}"/>
+									<Input width="4rem" value="{HPPAG}" editable="false" placeholder="{CNTHE}" app:campo="H_TEO" change="onChange2" submit="onChange2"/>
+									<Input width="4rem" value="{HPCOM}" editable="false" placeholder="{HPCOM_AUX}" app:campo="HPCOM" change="onChange2"
+										submit="onChange2"/>
+									<DatePicker displayFormat="dd-MM-yyyy" editable="false" valueFormat="yyyyMMdd" change="onChange"
+										value="{path:'FCOMP', formatter:'.Date'}"/>
+									<Input width="4rem" value="{HNAUT}" editable="{HNAUT_AUX2}" placeholder="{HNAUT_AUX}" app:campo="HNAUT" change="onChange2"
+										submit="onChange2"/>
+									<!--<Input app:campo="ID2" showSuggestion="true" editable="{MOTIVO_AUX}" maxSuggestionWidth="100%" liveChange="onLiveChange2" value="{MOTIVO}"
+										suggestionItemSelected="onSuggestionItemSelected"/>-->
+									<ComboBox showSecondaryValues="true" loadItems="onLoadItems" editable="false" change="onChange3" value="{MOTIVO}"
+										items="{ path: '/collection', sorter: { path: 'text' } }">
+										<core:ListItem key="{key}" text="{text}" additionalText="{key}"/>
+									</ComboBox>
+									<Input value="{COMENT}" maxLength="120" editable="false"/>
+									<Input value="{COMENT_HNA}" maxLength="120" editable="false"/>
+									<Label text="{NAME1}"/>
+									<Input value="{ORGTX}" editable="false"/>
+									<Label text="{H_TEO}"/>
+									<Label text="{H_REA}"/>
+									<Input value="{KTEXT}" editable="false"/>
+									<Input app:campo="KOSTL_SOL_FILTRO" editable="false" showSuggestion="true" maxSuggestionWidth="100%" liveChange="onLiveChange2"
+										value="{KTEXT_AP}" suggestionItemSelected="onSuggestionItemSelected"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+				<footer>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button text="Procesar" press="onSend" type="Accept"/>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,8 @@
+/* Enter your custom styles here */
+.sapMLIBShowSeparator>td{
+    border-top: 0px;           
+ }
+ 
+ .sapMListTblCell{
+     padding: .05rem !important;
+ }

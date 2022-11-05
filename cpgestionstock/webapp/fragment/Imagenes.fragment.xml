@@ -1,0 +1,122 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core" 
+	xmlns:t="sap.ui.table"
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title = "Imagenes"
+        afterClose= "closeImagenes"
+        contentWidth="80%">
+        <l:VerticalLayout class="sapUiContentPadding" width="100%">
+			<f:Form id="frmDetalle"
+                editable="true">
+                <!--<f:title>
+                    <core:Title text="Address" />
+                </f:title>-->
+                <f:layout>
+                    <f:ResponsiveGridLayout
+                        labelSpanXL="3"
+                        labelSpanL="3"
+                        labelSpanM="3"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="1"
+                        columnsL="1"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer id="elementos" title="">
+                        <f:formElements>
+                        	<f:FormElement id="lista0">
+                                <f:fields>
+                                	<Label id="foto1" textAlign="End" required="true" text="Imagen (1era)"/>
+                                    <u:FileUploader
+                                    	id="fileUpload1"
+					                    name=""
+					                    uploadUrl="upload/"
+					                    tooltip="Archivo ha Subir"
+					                    uploadComplete="handleUploadComplete"
+					                    fileType="jpg,jpeg,png"
+					                    change='onChangeImages'
+					                    app:data="0"
+					                    maximumFileSize="5"/>
+									<c:Icon tooltip="Borrar" class="sapUiTinyMarginEnd" src="sap-icon://decline" app:data="0" press="removeFile" color="#088ba9"/>
+									<Link id="link0" text="" press="descargarImagen" target= "_blank"/>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement id="lista1">
+                                <f:fields>
+                                	<Label id="foto2" textAlign="End" required="true" text="Imagen (2da)"/>
+                                    <u:FileUploader
+                                    	id="fileUpload2"
+					                    name=""
+					                    uploadUrl="upload/"
+					                    tooltip="Archivo ha Subir"
+					                    uploadComplete="handleUploadComplete"
+					                    fileType="jpg,jpeg,png"
+					                    change='onChangeImages'
+					                    app:data="1"
+					                    maximumFileSize="5"/>
+									<c:Icon tooltip="Borrar" class="sapUiTinyMarginEnd" src="sap-icon://decline" app:data="1" press="removeFile" color="#088ba9"/>
+									<Link id="link1" text="" press="descargarImagen" target= "_blank"/>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement id="lista2">
+                                <f:fields>
+                                	<Label id="foto3" textAlign="End" required="true" text="Imagen (3era)"/>
+                                    <u:FileUploader
+                                    	id="fileUpload3"
+					                    name=""
+					                    uploadUrl="upload/"
+					                    tooltip="Archivo ha Subir"
+					                    uploadComplete="handleUploadComplete"
+					                    fileType="jpg,jpeg,png"
+					                    change='onChangeImages'
+					                    app:data="2"
+					                    maximumFileSize="5"/>
+									<c:Icon tooltip="Borrar" class="sapUiTinyMarginEnd" src="sap-icon://decline" app:data="2" press="removeFile" color="#088ba9"/>
+									<Link id="link2" text="" press="descargarImagen" target= "_blank"/>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement id="lista3">
+                                <f:fields>
+                                	<Label id="foto4" textAlign="End" required="true" text="Imagen (4ta)"/>
+                                    <u:FileUploader
+                                    	id="fileUpload4"
+					                    name=""
+					                    uploadUrl="upload/"
+					                    tooltip="Archivo ha Subir"
+					                    uploadComplete="handleUploadComplete"
+					                    fileType="jpg,jpeg,png"
+					                    change='onChangeImages'
+					                    app:data="3"
+					                    maximumFileSize="5"/>
+									<c:Icon tooltip="Borrar" class="sapUiTinyMarginEnd" src="sap-icon://decline" app:data="3" press="removeFile" color="#088ba9"/>
+									<Link id="link3" text="" press="descargarImagen" target= "_blank"/>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement id="lista" label="">
+                                <f:fields>
+                                </f:fields>
+                            </f:FormElement>
+                        </f:formElements>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+		</l:VerticalLayout>
+		<endButton>
+		 	<Button text="Cerrar"
+                    press="closeImagenes"
+                    type="Reject"
+                    icon="sap-icon://decline"/>
+        </endButton>
+	</Dialog>
+</c:FragmentDefinition>

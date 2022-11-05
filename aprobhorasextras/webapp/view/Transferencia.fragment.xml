@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog id="idTransferencia" title="Transferir Solicitud">
+		<l:VerticalLayout class="sapUiContentPadding" width="100%">
+			<Input id="iptNumeroPersonal" type="Text" width="80%" maxSuggestionWidth="100%" placeholder="Ingrese Destinatario"
+				suggestionItems="{/}" liveChange="onLiveChange" app:campo="PERNR" showSuggestion="true">
+				<suggestionItems>
+					<core:ListItem key="{VALUE}" text="{TEXTO}" additionalText="{VALUE}"/>
+				</suggestionItems>
+			</Input>
+		</l:VerticalLayout>
+		<OverflowToolbar>
+			<Button press="onCerrar" type="Reject" text="Cerrar"></Button>
+			<ToolbarSpacer/>
+			<Button press="onTransferir" text="Transferir Solicitud"></Button>
+		</OverflowToolbar>
+	</Dialog>
+</core:FragmentDefinition>

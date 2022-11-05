@@ -1,0 +1,93 @@
+_schema-version: "3.2"
+ID: AsigGrupWorkFlow-asiggrupworkflow
+description: A Fiori application.
+version: 0.0.1
+modules:
+- name: AsigGrupWorkFlow-asiggrupworkflow-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: AsigGrupWorkFlow-asiggrupworkflow-destination-service
+    parameters:
+      content-target: true
+  - name: AsigGrupWorkFlow-asiggrupworkflow-repo-host
+    parameters:
+      service-key:
+        name: AsigGrupWorkFlow-asiggrupworkflow-repo-host-key
+  - name: AsigGrupWorkFlow-asiggrupworkflow-uaa
+    parameters:
+      service-key:
+        name: AsigGrupWorkFlow-asiggrupworkflow-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: AsigGrupWorkFlow-asiggrupworkflow_html_repo_host
+          ServiceInstanceName: AsigGrupWorkFlow-asiggrupworkflow-html5-srv
+          ServiceKeyName: AsigGrupWorkFlow-asiggrupworkflow-repo-host-key
+          sap.cloud.service: AsigGrupWorkFlow-asiggrupworkflow
+        - Authentication: OAuth2UserTokenExchange
+          Name: AsigGrupWorkFlow-asiggrupworkflow_uaa
+          ServiceInstanceName: iprovider_xsuaa
+          ServiceKeyName: AsigGrupWorkFlow-asiggrupworkflow-uaa-key
+          sap.cloud.service: AsigGrupWorkFlow-asiggrupworkflow
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: AsigGrupWorkFlow-asiggrupworkflow-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: AsigGrupWorkFlow-asiggrupworkflow-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - AsigGrupWorkFlowasiggrupworkflow.zip
+      name: AsigGrupWorkFlowasiggrupworkflow
+      target-path: resources/
+- name: AsigGrupWorkFlowasiggrupworkflow
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: AsigGrupWorkFlow-asiggrupworkflow-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: iprovider_destination
+    service-plan: lite
+- name: AsigGrupWorkFlow-asiggrupworkflow-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: xsuaa
+    service-name: iprovider_xsuaa
+    service-plan: application
+- name: AsigGrupWorkFlow-asiggrupworkflow-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: AsigGrupWorkFlow-asiggrupworkflow-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true

@@ -1,0 +1,40 @@
+<c:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:c="sap.ui.core"    
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form">
+	<Dialog title = "Comentario"
+        afterClose= "closeComentario">
+        <l:VerticalLayout class="sapUiContentPadding" 
+                              width="100%">
+            <form:Form width="100%" editable="true" visible="true">
+                <form:title/>
+                <form:formContainers>
+                    <form:FormContainer visible="true">
+                        <form:formElements>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Ingrese Comentario" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <TextArea id="txaComentario" value="" rows="4"/>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+                <form:layout>
+                    <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="2" labelSpanM="3" labelSpanS="12"/>
+                </form:layout>
+            </form:Form>
+        </l:VerticalLayout>
+        <endButton>
+		 	<Button text="Cerrar"
+                    press="closeComentario"
+                    type="Reject"
+                    icon="sap-icon://decline"/>
+        </endButton>
+	</Dialog>
+</c:FragmentDefinition>

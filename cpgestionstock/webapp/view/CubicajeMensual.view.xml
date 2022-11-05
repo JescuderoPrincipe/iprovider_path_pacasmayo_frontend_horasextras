@@ -1,0 +1,136 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.cementos.pacasmayo.cpgestionstock.controller.CubicajeMensual" xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <Page showHeader="true" title="Cubicaje Mensual" showFooter="true" showNavButton="true" navButtonPress="_onPageNavButtonPress">
+        <content>
+            <form:Form width="100%" editable="true" visible="true">
+                <form:title/>
+                <form:formContainers>
+                    <form:FormContainer visible="true">
+                        <form:formElements>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Planta" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <ComboBox id="cblCentro"
+                                        items="{centro>/centroitems}" selectedKey="" placeholder="Seleccionar Planta" editable="true" enabled="true" visible="true" width="100%" valueState="None" maxWidth="100%" change="onGetProducto">
+                                        <core:Item key="{centro>PLANTID}" text="{centro>PLANTID} - {centro>PLANTNAME}" />
+                                    </ComboBox>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Periodo" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <ComboBox id="cblAnio"
+                                        items="{anio>/anioitems}" selectedKey="" placeholder="Seleccionar año" editable="true" enabled="true" visible="true" width="100%" valueState="None" maxWidth="100%" change="onValidar">
+                                        <core:Item key="{anio>anio}" text="{anio>anio_desc}" />
+                                    </ComboBox>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>
+                    <form:FormContainer visible="true">
+                        <form:formElements>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Material" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <ComboBox id="slMaterial"
+                                            items="{slMaterial>/slMaterialitems}" selectedKey="" placeholder="Material" editable="true" enabled="false" visible="true" width="100%" valueState="None" maxWidth="100%" change="onValidar">
+                                            <core:Item key="{slMaterial>MATERIAL}" text="{slMaterial>COD_EXT} - {slMaterial>TEXT_MATERIAL}" />
+                                    </ComboBox>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Mes" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <ComboBox id="cblMes"
+                                        items="{mes>/mesitems}" selectedKey="" placeholder="Seleccionar Mes" editable="true" enabled="true" visible="true" width="100%" valueState="None" maxWidth="100%" change="onValidar">
+                                        <core:Item key="{mes>mes}" text="{mes>mes_desc}" />
+                                    </ComboBox>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                        <form:title/>
+                    </form:FormContainer>
+                    <form:FormContainer visible="true">
+                        <form:formElements>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Medio Alm." design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <ComboBox id="slMedioAlc"
+                                            items="{slMedioAlc>/slMedioAlcitems}" selectedKey="" placeholder="Medio Almacenamiento" editable="true" enabled="false" visible="true" width="100%" valueState="None" maxWidth="100%" change="onGetMaterial">
+                                            <core:Item key="{slMedioAlc>MEDIUM}" text="{slMedioAlc>MEDIUM_TEXT}" />
+                                    </ComboBox>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <OverflowToolbar width="100%" visible="true" enabled="true" iconDensityAware="false" style="Clear">
+                                        <content>
+                                            <!-- <ToolbarSpacer width="90%"/> -->
+                                            <Button text="Buscar" type="Emphasized" icon="sap-icon://search" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onBuscar"/>
+                                        </content>
+                                    </OverflowToolbar>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                        <form:title/>
+                    </form:FormContainer>
+                </form:formContainers>
+                <form:layout>
+                    <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="3" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+                </form:layout>
+            </form:Form>
+            <!-- <OverflowToolbar width="100%"  design="Auto" visible="true" enabled="true" class="sapUiLargeMarginBotton">
+                <content>
+                    <ToolbarSpacer width="90%"/>
+                    <Button text="Buscar" type="Emphasized" icon="sap-icon://search" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onBuscar"/>
+                </content>
+            </OverflowToolbar> -->
+            <Table id="tblCubicajeMensual" width="100%" noDataText="No se encontro informacion" mode="None" showSeparators="All" growing="true" growingThreshold="5" growingScrollToLoad="true">
+                <infoToolbar>
+                    <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                        <content>
+                            <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                        </content>
+                    </Toolbar>
+                </infoToolbar>
+                <headerToolbar>
+                    <OverflowToolbar width="100%" height="10%" design="Auto" visible="true" enabled="true">
+                        <content/>
+                    </OverflowToolbar>
+                </headerToolbar>
+            </Table>
+            <FlexBox
+                height="100px"
+                alignItems="Start"
+                justifyContent="End">
+                <items>
+                    <FormattedText id="total" type="Emphasized" class="sapUiLargeMarginEnd sapUiSmallMarginTop" />
+                </items>
+            </FlexBox>
+        </content>
+        <footer>
+            <OverflowToolbar width="100%" height="auto" design="Auto" enabled="true" visible="true">
+                <content>
+                    <ToolbarSpacer width=""/>
+                    <Button id="btnSave" text="Guardar" type="Emphasized" icon="sap-icon://save" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress"/>
+                    <Button text="Cancelar" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress1"/>
+                </content>
+            </OverflowToolbar>
+        </footer>
+        <headerContent/>
+        <subHeader/>
+        <customHeader/>
+    </Page>
+</mvc:View>

@@ -1,0 +1,93 @@
+_schema-version: "3.2"
+ID: ReporteTrabjador-reportetrabajador
+description: A Fiori application.
+version: 0.0.1
+modules:
+- name: ReporteTrabjador-reportetrabajador-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: ReporteTrabjador-reportetrabajador-destination-service
+    parameters:
+      content-target: true
+  - name: ReporteTrabjador-reportetrabajador-repo-host
+    parameters:
+      service-key:
+        name: ReporteTrabjador-reportetrabajador-repo-host-key
+  - name: ReporteTrabjador-reportetrabajador-uaa
+    parameters:
+      service-key:
+        name: ReporteTrabjador-reportetrabajador-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: ReporteTrabjador-reportetrabajador_html_repo_host
+          ServiceInstanceName: ReporteTrabjador-reportetrabajador-html5-srv
+          ServiceKeyName: ReporteTrabjador-reportetrabajador-repo-host-key
+          sap.cloud.service: ReporteTrabjador-reportetrabajador
+        - Authentication: OAuth2UserTokenExchange
+          Name: ReporteTrabjador-reportetrabajador_uaa
+          ServiceInstanceName: iprovider_xsuaa
+          ServiceKeyName: ReporteTrabjador-reportetrabajador-uaa-key
+          sap.cloud.service: ReporteTrabjador-reportetrabajador
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: ReporteTrabjador-reportetrabajador-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: ReporteTrabjador-reportetrabajador-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - ReporteTrabjadorreportetrabajador.zip
+      name: ReporteTrabjadorreportetrabajador
+      target-path: resources/
+- name: ReporteTrabjadorreportetrabajador
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: ReporteTrabjador-reportetrabajador-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: iprovider_destination
+    service-plan: lite
+- name: ReporteTrabjador-reportetrabajador-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: xsuaa
+    service-name: iprovider_xsuaa
+    service-plan: application
+- name: ReporteTrabjador-reportetrabajador-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: ReporteTrabjador-reportetrabajador-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true

@@ -1,0 +1,78 @@
+{
+	"items": [
+		{
+			"documentId": "64469d2f-b3c4-a517-20d6-f91ebf85b9da",
+			"fileName": "Screenshot.jpg",
+			"mimeType": "image/jpg",
+			"thumbnailUrl": "",
+			"url": "sap/fiori/hondadpportaladuanasimportac/util/LinkedDocuments/Screenshot.jpeg",
+			"attributes": [
+				{
+					"title": "Subido por",
+					"text": "Israel Espinoza",
+					"active": false
+				},
+				{
+					"title": "Subido el",
+					"text": "2014-09-03",
+					"active": false
+				},
+				{
+					"title": "Tamaño del Archivo",
+					"text": "5",
+					"active": false
+				}
+			],
+			"statuses": [
+				{
+					"title": "First status' title",
+					"text": "First status' text",
+					"state": "None"
+				}
+			],
+			"markers": [
+				{
+					"type": "Flagged"
+				}
+			],
+			"selected": false
+		},
+		{
+			"documentId": "64469d2f-b3c4-a517-20d6-f91ebf85b9da",
+			"fileName": "portaldealer.docx",
+			"mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+			"thumbnailUrl": "",
+			"url": "sap/fiori/hondadpportaladuanasimportac/util/LinkedDocuments/portaldealer.docx",
+			"attributes": [
+				{
+					"title": "Subido por",
+					"text": "Gianfranco Paoli",
+					"active": false
+				},
+				{
+					"title": "Subido el",
+					"text": "2014-09-03",
+					"active": false
+				},
+				{
+					"title": "Tamaño del Archivo",
+					"text": "5",
+					"active": false
+				}
+			],
+			"statuses": [
+				{
+					"title": "First status' title",
+					"text": "First status' text",
+					"state": "None"
+				}
+			],
+			"markers": [
+				{
+					"type": "Flagged"
+				}
+			],
+			"selected": false
+		}
+	]
+}

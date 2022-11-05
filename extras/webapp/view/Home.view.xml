@@ -1,0 +1,32 @@
+<mvc:View controllerName="repo.Horas.extras.controller.Home" height="100%" xmlns:mvc="sap.ui.core.mvc" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartVariantManagement="sap.ui.comp.smartvariants" xmlns:smartTable="sap.ui.comp.smarttable" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App id="app">
+		<pages>
+			<Page id="page" title="{i18n>title}">
+				<content>
+					<smartFilterBar:SmartFilterBar initialized="onInitialized" entitySet="zreporteHorasExtrasSet" considerSelectionVariants="true" id="smartFilterBar"
+						persistencyKey="SmartFilterPKey">
+						<smartFilterBar:controlConfiguration>
+							<smartFilterBar:ControlConfiguration key="bukrs" index="1" visibleInAdvancedArea="true"/>
+							<smartFilterBar:ControlConfiguration key="feche" index="2" visibleInAdvancedArea="true"/>
+							<smartFilterBar:ControlConfiguration key="persa" index="3" visibleInAdvancedArea="true"/>
+							<smartFilterBar:ControlConfiguration key="pernr" index="4" visibleInAdvancedArea="true"/>
+							<smartFilterBar:ControlConfiguration key="nombre" index="5" visibleInAdvancedArea="true"/>
+							<smartFilterBar:ControlConfiguration key="orgtx" index="6" visibleInAdvancedArea="true"/>
+							<smartFilterBar:ControlConfiguration key="plans" index="7" visibleInAdvancedArea="true"/>
+							<smartFilterBar:ControlConfiguration key="kostl" index="8" visibleInAdvancedArea="true"/>
+							<smartFilterBar:ControlConfiguration key="kostl_ap" index="9" visibleInAdvancedArea="true"/>
+							<smartFilterBar:ControlConfiguration key="tipem" index="10" visibleInAdvancedArea="true"/>
+						</smartFilterBar:controlConfiguration>
+					</smartFilterBar:SmartFilterBar>
+					<smartTable:SmartTable ignoredFields="p_pernr" entitySet="zreporteHorasExtrasSet" header="Solicitudes" requestAtLeastFields="solhe" beforeRebindTable="onBeforeRebindTable"
+						initiallyVisibleFields="pernr,nombre,bukrs,butxt,persa,name1,orgtx,plans,stext,tipem,kostl,ltext,kostl_ap,ltext_ap,anio,mes,feche,h_teo,h_rea,h_trd,cnthe,hppag,hpcom,fcomp,text,coment,hnaut,coment_hna,estado,responsable,text1,solhe"
+						id="LineItemsSmartTable" smartFilterId="smartFilterBar" tableType="Table" useExportToExcel="true" useTablePersonalisation="true"
+						showRowCount="true" persistencyKey="SmartTablePKey" enableAutoBinding="true" class="sapUiResponsiveContentPadding">
+					</smartTable:SmartTable>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

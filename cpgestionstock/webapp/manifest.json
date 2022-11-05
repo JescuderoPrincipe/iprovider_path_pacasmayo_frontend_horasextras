@@ -1,0 +1,229 @@
+{
+    "_version": "1.40.0",
+    "sap.app": {
+        "id": "com.cementos.pacasmayo.cpgestionstock",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.7.1",
+            "toolsId": "a28e127d-c26e-43bf-be97-0111ecb73397"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.102.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.cementos.pacasmayo.cpgestionstock.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {}
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "com.cementos.pacasmayo.cpgestionstock.view",
+				"controlId": "App",
+				"clearTarget": false,
+				"controlAggregation": "pages"
+			},
+			"targets": {
+				"GestionDeStock": {
+					"controlAggregation": "pages",
+					"viewName": "GestionDeStock",
+					"viewId": "GestionDeStock",
+					"viewLevel": 1,
+					"transition": "slide"
+				},
+				"MedicionDiaria": {
+					"controlAggregation": "pages",
+					"viewName": "MedicionDiaria",
+					"viewId": "MedicionDiaria",
+					"viewLevel": 2,
+					"transition": "slide"
+				},
+				"DetalleDeMedicionDiaria": {
+					"controlAggregation": "pages",
+					"viewName": "DetalleDeMedicionDiaria",
+					"viewId": "DetalleDeMedicionDiaria",
+					"viewLevel": 3,
+					"transition": "slide"
+				},
+				"CubicajeMensual": {
+					"controlAggregation": "pages",
+					"viewName": "CubicajeMensual",
+					"viewId": "CubicajeMensual",
+					"viewLevel": 4,
+					"transition": "slide"
+				},
+				"DetalleDeCubicajeMensual": {
+					"controlAggregation": "pages",
+					"viewName": "DetalleDeCubicajeMensual",
+					"viewId": "DetalleDeCubicajeMensual",
+					"viewLevel": 5,
+					"transition": "slide"
+				},
+				"StockEnBolsas": {
+					"controlAggregation": "pages",
+					"viewName": "StockEnBolsas",
+					"viewId": "StockEnBolsas",
+					"viewLevel": 6,
+					"transition": "slide"
+				},
+				"DetalleDeStockEnBolsas": {
+					"controlAggregation": "pages",
+					"viewName": "DetalleDeStockEnBolsas",
+					"viewId": "DetalleDeStockEnBolsas",
+					"viewLevel": 7,
+					"transition": "slide"
+				},
+				"ReporteEvolucionStock": {
+					"controlAggregation": "pages",
+					"viewName": "ReporteEvolucionStock",
+					"viewId": "ReporteEvolucionStock",
+					"viewLevel": 8,
+					"transition": "slide"
+				}
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "GestionDeStock",
+					"target": [
+						"GestionDeStock"
+					]
+				},
+				{
+					"pattern": "",
+					"name": "default",
+					"target": [
+						"GestionDeStock"
+					]
+				},
+				{
+					"pattern": "MedicionDiaria/:context:",
+					"name": "MedicionDiaria",
+					"target": [
+						"MedicionDiaria"
+					]
+				},
+				{
+					"pattern": "DetalleDeMedicionDiaria/:context:",
+					"name": "DetalleDeMedicionDiaria",
+					"target": [
+						"DetalleDeMedicionDiaria"
+					]
+				},
+				{
+					"pattern": "CubicajeMensual/:context:",
+					"name": "CubicajeMensual",
+					"target": [
+						"CubicajeMensual"
+					]
+				},
+				{
+					"pattern": "DetalleDeCubicajeMensual/:context:",
+					"name": "DetalleDeCubicajeMensual",
+					"target": [
+						"DetalleDeCubicajeMensual"
+					]
+				},
+				{
+					"pattern": "StockEnBolsas/:context:",
+					"name": "StockEnBolsas",
+					"target": [
+						"StockEnBolsas"
+					]
+				},
+				{
+					"pattern": "DetalleDeStockEnBolsas/:context:",
+					"name": "DetalleDeStockEnBolsas",
+					"target": [
+						"DetalleDeStockEnBolsas"
+					]
+				},
+				{
+					"pattern": "ReporteEvolucionStock/:context:",
+					"name": "ReporteEvolucionStock",
+					"target": [
+						"ReporteEvolucionStock"
+					]
+				}
+			]
+		},
+        "rootView": {
+            "viewName": "com.cementos.pacasmayo.cpgestionstock.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "com-cementos-pacasmayo-cpgestionstock"
+    }
+}

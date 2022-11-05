@@ -1,0 +1,6 @@
+/* Enter your custom styles here */
+.sapUiAFLayoutItem {
+    width: 28% !important;
+    flex-basis: 28% !important;
+    max-width: 28% !important;
+}
